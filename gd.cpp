@@ -3,7 +3,7 @@
 
 class display50x50{
   private:
-    COLORREF[50*50] displayStorage;
+    COLORREF displayStorage[50*50];
   public:
     bool setXY(int x,int y,char z){
       if(x<50&&x>-1&&y<50&&y>-1){
@@ -17,16 +17,20 @@ class display50x50{
         return displayStorage[y*50+x];
       }
     }
-    void print(){
-      int rectSize=10;
-      for(int y=0;y<500;y+=10){
-        for(int x=0;x<500;x+=10){
-          HBRUSH brush=CreateSolidBrush(getXY(x/10,y/10));
-          SelectObject(hdc, brush);
-          Rectangle(hdc,x,y,x+rectSize,y+rectSize);
-        }
+  void print(HDC hdc, HWND hwnd) {
+        int rectSize = 10;
+        PAINTSTRUCT ps;
+        BeginPaint(hwnd, &ps);
+        for (int y = 0; y < 50; ++y) { // Adjusted loop limit to 50
+            for (int x = 0; x < 50; ++x) {
+                HBRUSH brush = CreateSolidBrush(getXY(x, y));
+                SelectObject(hdc, brush);
+                Rectangle(hdc, x * rectSize, y * rectSize, (x + 1) * rectSize, (y + 1) * rectSize);
+                DeleteObject(brush);
+           }
       }
-    }
+    EndPaint(hwnd, &ps);
+  }
 };
 
 class charachter{
@@ -38,5 +42,7 @@ class charachter{
     
 };
 
-int main(){
+int WINAPI WinMain(HINSTANCE hInstance,HINSTANCE LPSTR,int nShowCmd){
+  
+  return 0;
 }
