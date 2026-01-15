@@ -1,22 +1,23 @@
 #include <iostream>
 #include <windows.h>
+#include <vector>
 
 class display50x50{
   private:
-    COLORREF displayStorage[50*50];
+    std::Vector<COLORREF> displayStorage;
   public:
     bool setXY(int x,int y,COLORREF z){
-      if(x<50&&x>-1&&y<50&&y>-1){
-        displayStorage[y*50+x]=z;
+      if(x<displayStorage.size()&&x>-1&&y<displayStorage.size()&&y>-1){
+        displayStorage[y*(sqrt(displayStorage.size()/144)*9)+x]=z;
         return true;
       }
       return false;
     }
     COLORREF getXY(int x,int y){
-      if(x<50&&x>-1&&y<50&&y>-1){
-        return displayStorage[y*50+x];
+      if((x<displayStorage.size()&&x>-1&&y<displayStorage.size()&&y>-1)){
+        return displayStorage[y*+(sqrt(displayStorage.size()/144)*9)+x];
       }
-return null;
+      return null;
     }
   void print(HDC hdc, HWND hwnd) {
         int rectSize = 10;
@@ -47,7 +48,7 @@ class charachter{
   public:
     void refresh(HDC hdc, HWND hwnd,display50x50 display){
       display.print(hdc,hwnd);
-
+      
     }
 };
 
