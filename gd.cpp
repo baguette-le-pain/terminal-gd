@@ -5,14 +5,14 @@ class display50x50{
   private:
     COLORREF displayStorage[50*50];
   public:
-    bool setXY(int x,int y,char z){
+    bool setXY(int x,int y,COLORREF z){
       if(x<50&&x>-1&&y<50&&y>-1){
-        displayStorage[y*50+x];
+        displayStorage[y*50+x]=z;
         return true;
       }
       return false;
     }
-    char getXY(int x,int y){
+    COLORREF getXY(int x,int y){
       if(x<50&&x>-1&&y<50&&y>-1){
         return displayStorage[y*50+x];
       }
