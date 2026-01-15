@@ -16,6 +16,7 @@ class display50x50{
       if(x<50&&x>-1&&y<50&&y>-1){
         return displayStorage[y*50+x];
       }
+return null;
     }
   void print(HDC hdc, HWND hwnd) {
         int rectSize = 10;
