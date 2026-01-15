@@ -31,6 +31,11 @@ class display50x50{
       }
     EndPaint(hwnd, &ps);
   }
+  void whitewash(){
+    for (int i=0;i<50*50;i++){
+      displayStorage[i]=RGB(50,50,50);
+    }
+  }
 };
 
 class charachter{
@@ -39,7 +44,10 @@ class charachter{
     int x;
     int up;
   public:
-    
+    void refresh(HDC hdc, HWND hwnd,display50x50 display){
+      display.print(hdc,hwnd);
+
+    }
 };
 
 int WINAPI WinMain(HINSTANCE hInstance,HINSTANCE LPSTR,int nShowCmd){
